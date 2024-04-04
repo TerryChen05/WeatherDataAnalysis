@@ -8,27 +8,32 @@ int main(void) {
     int year, month;
     double temperature, total_years, jan_sum, feb_sum, mar_sum, apr_sum, may_sum, jun_sum, jul_sum, aug_sum, sep_sum, oct_sum, nov_sum, dec_sum ;
    
-    out = fopen("GlobalTemperatures.txt", "r"); 
+    out = fopen("GlobalTemperatures.txt", "r"); // Opens to read and write
    
+    // Error message if unable to access source file
     if (out == NULL) {
         printf("Access to 'GlobalTemperatures.txt' unsuccessful.\n");
         exit(1);
     }
 
+
+    // Resetting file pointer & variables
     rewind(out);
-    
     temperature = 0;
+
 
     while (fgets(line, sizeof(line), out)) {
        
+        // Divide the line to extract date and temperature
         if (sscanf(line, "%10[^,],%lf", date, &temperature) == 2) {
            
+            // Extract the year from the date
             sscanf(date, "%d-%d", &year, &month);
            
             if (year >= 1900 && year <= 2015) {
-                if (month == 1) { 
+                if (month == 1) { // January
                     jan_sum += temperature;
-                } else if (month == 2) { 
+                } else if (month == 2) { // February
                     feb_sum += temperature;
                 } else if (month == 3) {
                     mar_sum += temperature;
@@ -56,7 +61,9 @@ int main(void) {
         }
     }
 
+
     total_years = (2015-1900+1);
+
 
     printf("The January Average is: %.3lf%cC\n", jan_sum/total_years, symb);
     printf("The February Average is: %.3lf%cC\n", feb_sum/total_years, symb);
@@ -71,7 +78,9 @@ int main(void) {
     printf("The November Average is: %.3lf%cC\n", nov_sum/total_years, symb);
     printf("The December Average is: %.3lf%cC\n", dec_sum/total_years, symb);
 
+
     fclose(out);
    
     return(0);
 }
+
