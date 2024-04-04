@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//converts month value to its string equivalent
 char *monthConvert(int month) { 
 	switch (month){
 		case 1:
@@ -33,35 +34,41 @@ char *monthConvert(int month) {
 }
 
 int main(void) {
-char line[250], date[11], symb = 248; 
+
+char line[250], date[11], symb = 248; // 248 for degree symbol 
 	int year, month, hottestM, hottestY, coldestM, coldestY;
       double temperature, hottestT, coldestT;
 	
+	// Opens file and checks if successful 
 	FILE *out;
 	out = fopen("GlobalTemperatures.txt", "r");
 	
     if (out == NULL) {
       	printf("Access to 'GlobalTemperatures.txt' was unsuccessful.\n");
       	exit(1);
-      }
+    }
 	
-      rewind(out);
+    rewind(out);
     
+    // Reads first line of date and temperature data
     sscanf(line, "%10[^,],%lf", date, &temperature); 
     sscanf(date, "%d-%d", &year, &month); 
     
+    // Sets hottest/coldest info to the first line data
     hottestM = month;
     hottestY = year;
     hottestT = temperature; 
     coldestT = temperature;
     coldestM = month;
     coldestY = year;
-        
+      
 	while (fgets(line, sizeof(line), out)){
 		
+      	// Reads date and temperature data
       	sscanf(line, "%10[^,],%lf", date, &temperature); 
       	sscanf(date, "%d-%d", &year, &month); 
         
+      	// Checks if the current values are hotter/colder and reassigns accordingly
    		if (temperature >= hottestT) {
 			hottestT = temperature;
 			hottestY = year;
@@ -72,17 +79,22 @@ char line[250], date[11], symb = 248;
 			coldestY = year;
 			coldestM = month;
 		}
-}	
+    }	
 
+	// Uses the monthConvert function to change the month value to its name
 	char* hotMonth = monthConvert(hottestM);
 	char* coldMonth = monthConvert(coldestM);
 	
-      printf("Hottest Month was on %s %d with an average Temp of: %.2lf%cC\n", hotMonth, hottestY, hottestT, symb);
-      printf("Coldest Month was on %s %d with an average Temp of: %.2lf%cC\n", coldMonth, coldestY, coldestT, symb);
+	// Prints the obtained hottest and coldest date and their respective temperatures
+    printf("Hottest Month was on %s %d with an average Temp of: %.2lf%cC\n", hotMonth, hottestY, hottestT, symb);
+    printf("Coldest Month was on %s %d with an average Temp of: %.2lf%cC\n", coldMonth, coldestY, coldestT, symb);
 
 	fclose(out);
 	return(0);
 }
+
+
+
 
 
 
