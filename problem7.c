@@ -11,7 +11,7 @@ int main()
     // Open the file and read it
     // Open the file and write to it
     file = fopen ("problem1.txt", "r");
-    dataF = fopen ("DATA.txt", "w");
+    dataF = fopen ("problem7data.dat", "w");
     
     // Tries to open the file and if it cannot be opened then an error will show up
     if (file == NULL) {
