@@ -22,7 +22,9 @@ int main (void) {
 	
 	double centuryAvg = 0, centuryMin = 0, centuryMax = 0;
 	
+	// reads data from the csv file
 	while (fgets(line, sizeof(line), out)){
+		// checks if its the beginning of a century and resets the values
 		if ((year == 1849 && month == 12) || (year == 1999 && month == 12) || (year == 1899 && month == 12)){
 			count = 1;
 			centuryAvg = 0;
@@ -30,15 +32,17 @@ int main (void) {
 			centuryMax = 0;
 		}
 			
+        // reads date and temperature data
         sscanf(line, "%10[^,],%lf,%lf,%lf,%lf,%lf", date, &avgTemp, &avgUnc, &maxTemp, &maxUnc, &minTemp); 
+        // gets the year and month from the date string
         sscanf(date, "%d-%d", &year, &month); 
-
+        // totals up the values
         centuryAvg += avgTemp;
         centuryMin += minTemp;
         centuryMax += maxTemp;
-
+        // checks if its the end of a century then prints the values
         if((year == 1899 && month == 12) || (year == 1999 && month == 12) || (year == 2015 && month == 12)) {
-
+			// averages the values
 			centuryAvg = centuryAvg/count;
 	        centuryMin = centuryMin/count;
 			centuryMax = centuryMax/count;
@@ -58,4 +62,5 @@ int main (void) {
 
 	return 0;
 }
+
 
