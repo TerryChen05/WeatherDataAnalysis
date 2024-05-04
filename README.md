@@ -12,7 +12,7 @@ The C code processes temperature data from various weather monitoring systems ar
 
 5.) Using the results from '1.)', determines the hottest and coldest year
 
-6.) Using the results from '1.)', generates a data file to be graphed in GNUPlot (line plot of the yearly temperatures from 1760 to 2015)
+6.) Using the results from '1.)', graphs in GNUPlot the yearly temperatures from 1760 to 2015
 
 7.) Generates a data file of the average land temperatures during the 19th and 20th centuries and uses it to create a GNUPlot for a trend analysis
 
