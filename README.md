@@ -1,4 +1,4 @@
-Project was created March 2024 Using C:
+Project was created March 2024:
 
 The C code processes temperature data from various weather monitoring systems around the world between 1750 and 2015, and uses it to perform calculations to generate specific information:
 
